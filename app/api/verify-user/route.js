@@ -1,6 +1,7 @@
 import { db } from "@/config/db";
 import { Users } from "@/config/schema";
 import { NextResponse } from "next/server";
+import { eq } from "drizzle-orm";
 
 export async function POST(req) {
   try {
@@ -10,11 +11,10 @@ export async function POST(req) {
     const existingUser = await db
       .select()
       .from(Users)
-      .where(eq(Users.email, user?.email));
+      .where(eq(Users.email, user?.primaryEmailAddress.emailAddress));
 
-    if (existingUser.empty()) {
-      // If not, add the user to the database
-
+    if (existingUser.length === 0) {
+      // User doesn't exist, create one
       const insertRes = await db
         .insert(Users)
         .values({
@@ -22,14 +22,18 @@ export async function POST(req) {
           email: user?.primaryEmailAddress.emailAddress,
           imageUrl: user?.imageUrl,
         })
-        .returning(user);
+        .returning({ Users });
+
+      console.log(insertRes);
 
       return NextResponse.json({ result: insertRes });
     } else {
-      return NextResponse.json({ result: existingUser });
+      console.log("User already exists");
     }
+
+    return NextResponse.json({ result: existingUser });
   } catch (error) {
     console.log(error);
-    return NextResponse.status(500).json({ error });
+    return NextResponse.json({ error });
   }
 }
