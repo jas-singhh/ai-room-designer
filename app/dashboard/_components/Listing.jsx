@@ -1,10 +1,12 @@
 "use client";
 import { UserContext } from "@/app/contexts/UserContext";
 import { Button } from "@/components/ui/button";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import EmptyState from "./EmptyState";
 
 const Listing = () => {
   const { dbUser } = useContext(UserContext);
+  const [previousListings, setPreviousListings] = useState([]);
 
   return (
     <div className="w-full">
@@ -17,6 +19,8 @@ const Listing = () => {
           + Redesign a Room
         </Button>
       </div>
+
+      <div className="mt-10">{previousListings.length === 0 ? <EmptyState /> : <h3>Your previous room designs will appear here.</h3>}</div>
     </div>
   );
 };
