@@ -15,10 +15,10 @@ const outfit = Outfit({
 export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <Provider>
-          <body className={`${outfit.className} antialiased`}>{children}</body>
-        </Provider>
+      <html lang="en" className={outfit.className}>
+        <body className="antialiased">
+          <Provider>{children}</Provider>
+        </body>
       </html>
     </ClerkProvider>
   );
