@@ -37,8 +37,6 @@ const Listing = () => {
 
     setPreviousListings(res);
     setIsLoading(false);
-
-    console.log("Previous listings fetched:", res);
   };
 
   return (

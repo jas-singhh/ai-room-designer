@@ -7,22 +7,30 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import React from "react";
+import React, { useState } from "react";
 import ReactBeforeSliderComponent from "react-before-after-slider-component";
 import "react-before-after-slider-component/dist/build.css";
+import ResultDialog from "../create-new/_components/ResultDialog";
 
 const PreviousListingCard = ({ listing }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
   const FIRST_IMAGE = {
-    imageUrl: listing.originalImage,
+    imageUrl: listing.generatedImage,
   };
   const SECOND_IMAGE = {
-    imageUrl: listing.afterImage,
+    imageUrl: listing.originalImage,
   };
 
   return (
     <>
-      <Card>
-        <CardHeader className={"p-0"}>
+      <Card
+        className={
+          "hover:scale-[103%] transition-transform ease-in-out duration-500 cursor-pointer"
+        }
+        onClick={() => setIsOpen(true)}
+      >
+        <CardHeader>
           <CardTitle>
             <h2 className="text-sm text-gray-700 text-center">
               {listing.roomType} - {listing.roomDesign}
@@ -37,6 +45,13 @@ const PreviousListingCard = ({ listing }) => {
           />
         </CardContent>
       </Card>
+
+      <ResultDialog
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        originalImageUrl={listing.originalImage}
+        generatedImageUrl={listing.generatedImage}
+      />
     </>
   );
 };
