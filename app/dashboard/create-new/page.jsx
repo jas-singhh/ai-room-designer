@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ImageUpload from "./_components/ImageUpload";
 import RoomType from "./_components/RoomType";
 import DesignStyle from "./_components/DesignStyle";
@@ -10,6 +10,8 @@ import axios from "axios";
 import { uploadBytes } from "firebase/storage";
 import { getDownloadURL, ref } from "firebase/storage";
 import { storage } from "@/config/firebaseConfig"; // Adjust the import path as necessary
+import { useUser } from "@clerk/nextjs";
+import Loader from "./_components/Loader";
 
 const CreateNewListing = () => {
   const [formData, setFormData] = useState({
@@ -18,6 +20,9 @@ const CreateNewListing = () => {
     comments: "",
     image: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
+
+  const { user } = useUser();
 
   const handleInputChange = (field, value) => {
     setFormData((prevData) => ({
@@ -32,10 +37,28 @@ const CreateNewListing = () => {
       return;
     }
 
+    setIsLoading(true);
+
     // Save image to Firebase
     const imageUrl = await saveImageToFirebase();
 
-    const res = await axios.post("/api/generate-image", formData);
+    const res = await axios.post("/api/generate-image", {
+      selectedRoomDesign: formData?.selectedRoomDesign,
+      selectedRoomType: formData?.selectedRoomType,
+      comments: formData?.comments,
+      imageUrl: imageUrl,
+      email: user?.emailAddresses[0]?.emailAddress || "", // Use user's email if available
+    });
+
+    setIsLoading(false);
+
+    if (res.status !== 200) {
+      alert("Failed to generate image. Please try again.");
+      return;
+    }
+
+    // Handle the response from the image generation API
+
     console.log("Response from image generation:", res.data);
   };
 
@@ -85,6 +108,8 @@ const CreateNewListing = () => {
           </Button>
         </div>
       </div>
+
+      <Loader isOpen={isLoading} />
     </div>
   );
 };

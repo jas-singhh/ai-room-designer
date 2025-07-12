@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
       <html lang="en" className={outfit.className}>
-        <body className="antialiased">
+        <body className="antialiased" suppressHydrationWarning>
           <Provider>{children}</Provider>
         </body>
       </html>

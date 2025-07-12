@@ -39,7 +39,7 @@ const ImageUpload = ({ onImageUpload }) => {
       </label>
       <Input
         type="file"
-        accept="image/*"
+        accept="image/jpeg, image/jpg"
         id="image-upload"
         hidden
         onChange={(upload) => {
