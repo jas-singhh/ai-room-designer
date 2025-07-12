@@ -8,10 +8,7 @@ export async function POST(req) {
     const { user } = await req.json();
 
     // Check if user exists in the database
-    const existingUser = await db
-      .select()
-      .from(Users)
-      .where(eq(Users.email, user?.primaryEmailAddress.emailAddress));
+    const existingUser = await db.select().from(Users).where(eq(Users.email, user?.primaryEmailAddress.emailAddress));
 
     if (existingUser.length === 0) {
       // User doesn't exist, create one
@@ -23,8 +20,6 @@ export async function POST(req) {
           imageUrl: user?.imageUrl,
         })
         .returning({ Users });
-
-      console.log(insertRes);
 
       return NextResponse.json({ result: insertRes });
     } else {

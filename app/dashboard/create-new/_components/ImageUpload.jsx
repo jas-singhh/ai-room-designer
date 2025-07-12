@@ -4,14 +4,16 @@ import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import React, { useState } from "react";
 
-const ImageUpload = () => {
+const ImageUpload = ({ onImageUpload }) => {
   const [upload, setUpload] = useState(null);
 
   const handleImageUpload = (event) => {
-    console.log("Image uploaded:", event.target.files[0]);
     if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
+      console.log("Selected file:", file);
+
       setUpload(file);
+      onImageUpload(file); // Pass the file to the parent component
     }
   };
 
@@ -35,7 +37,15 @@ const ImageUpload = () => {
           )}
         </div>
       </label>
-      <Input type="file" accept="image/*" id="image-upload" hidden onChange={handleImageUpload} />
+      <Input
+        type="file"
+        accept="image/*"
+        id="image-upload"
+        hidden
+        onChange={(upload) => {
+          handleImageUpload(upload);
+        }}
+      />
     </div>
   );
 };

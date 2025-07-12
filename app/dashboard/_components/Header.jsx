@@ -10,12 +10,8 @@ import { UserContext } from "@/app/contexts/UserContext";
 const Header = () => {
   const { dbUser } = React.useContext(UserContext);
 
-  useEffect(() => {
-    console.log("User in Header: ", dbUser);
-  }, [dbUser]);
-
   return (
-    <div className="w-full flex justify-between items-center py-4 px-20 container border-b border-gray-200 bg-white ">
+    <div className="w-full flex justify-between items-center py-4 px-20 container border-b border-gray-200 bg-white mx-auto">
       {/* Logo */}
       <div className="flex items-center gap-2">
         <Link href={"/dashboard"} className="flex items-center gap-2">
