@@ -28,16 +28,16 @@ Here are some example screenshots of the application:
 
 ### 🏡 Home Page
 
-![Home](./public/Home.png)
-![Home2](./public/Home2.png)
+![Home](./screenshots/Home.png)
+![Home2](./screenshots/Home2.png)
 
 ### 🖼️ Create Image
 
-![Create Image](./public/CreateImage.png)
+![Create Image](./screenshots/CreateImage.png)
 
 ### ⚙️ Generating Image
 
-![Generating Image](./public/GeneratingImage.png)
+![Generating Image](./screenshots/GeneratingImage.png)
 
 ---
 
