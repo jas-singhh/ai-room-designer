@@ -12,6 +12,7 @@ import { getDownloadURL, ref } from "firebase/storage";
 import { storage } from "@/config/firebaseConfig"; // Adjust the import path as necessary
 import { useUser } from "@clerk/nextjs";
 import Loader from "./_components/Loader";
+import ResultDialog from "./_components/ResultDialog";
 
 const CreateNewListing = () => {
   const [formData, setFormData] = useState({
@@ -21,6 +22,9 @@ const CreateNewListing = () => {
     image: "",
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [originalImageUrl, setOriginalImageUrl] = useState("");
+  const [generatedImageUrl, setGeneratedImageUrl] = useState("");
+  const [isResultDialogOpen, setIsResultDialogOpen] = useState(false);
 
   const { user } = useUser();
 
@@ -57,7 +61,12 @@ const CreateNewListing = () => {
       return;
     }
 
-    // Handle the response from the image generation API
+    // Store the generated image URL and original image URL
+    if (res.data.result) setGeneratedImageUrl(res.data.result);
+    setOriginalImageUrl(imageUrl);
+
+    // Display result
+    setIsResultDialogOpen(true);
 
     console.log("Response from image generation:", res.data);
   };
@@ -110,6 +119,12 @@ const CreateNewListing = () => {
       </div>
 
       <Loader isOpen={isLoading} />
+      <ResultDialog
+        isOpen={isResultDialogOpen}
+        setIsOpen={setIsResultDialogOpen}
+        originalImageUrl={originalImageUrl}
+        generatedImageUrl={generatedImageUrl}
+      />
     </div>
   );
 };

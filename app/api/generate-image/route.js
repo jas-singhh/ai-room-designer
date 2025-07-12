@@ -53,7 +53,8 @@ export async function POST(req) {
 
     // Return the image URL or any other response
 
-    return NextResponse.json({ result: insertRes[0] }, { status: 200 });
+    // CHANGE RES TO THE ACTUAL OUTPUT FROM REPLICATE
+    return NextResponse.json({ result: res }, { status: 200 });
   } catch (error) {
     console.error("Error in generate image route: ", error);
     return NextResponse.json({ error: "Failed to generate image" }, { status: 500 });
