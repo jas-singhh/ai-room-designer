@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🏠 AI Room Designer
 
-## Getting Started
+AI Room Designer is a web application that allows users to upload an image of a room, select the type of room and desired interior design style, and generate a stunning AI-enhanced version of the space using **Replicate AI**. The application provides a smooth and secure user experience with authentication powered by **Clerk**, clean UI built with **shadcn/ui**, and API integration handled via **Axios**.
 
-First, run the development server:
+---
+
+## ✨ Features
+
+- 🖼️ Upload an image of any room in your home.
+- 🏷️ Select the **type of room** (e.g., bedroom, living room, kitchen, etc.).
+- 🎨 Choose from **6 unique design styles**:
+  - **Modern**
+  - **Industrial**
+  - **Minimalist**
+  - **Traditional**
+  - **Bohemian**
+  - **Rustic**
+- ⚙️ Generate a fully redesigned version of your room using **Replicate AI**.
+- 🔐 Secure user authentication using **Clerk**.
+- 💅 Clean and responsive UI powered by **shadcn/ui**.
+- ⚡ Fast and simple API calls with **Axios**.
+
+---
+
+## 📸 Preview
+
+Here are some example screenshots of the application:
+
+### 🏡 Home Page
+
+![Home](./public/Home.png)
+![Home2](./public/Home2.png)
+
+### 🖼️ Create Image
+
+![Create Image](./public/CreateImage.png)
+
+### ⚙️ Generating Image
+
+![Generating Image](./public/GeneratingImage.png)
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend**: React, Next.js App Router, JavaScript, Tailwind CSS
+- **UI Components**: [shadcn/ui](https://ui.shadcn.com/)
+- **Authentication**: [Clerk](https://clerk.dev/)
+- **AI Image Generation**: [Replicate](https://replicate.com/)
+- **HTTP Client**: [Axios](https://axios-http.com/)
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/jas-singhh/ai-room-designer.git
+cd ai-room-designer
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Create Environment Variables
+
+Create a `.env.local` file in the root of your project and add the following:
+
+```env
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+CLERK_SECRET_KEY=your_clerk_secret_key
+REPLICATE_API_TOKEN=your_replicate_api_token
+NEXT_PUBLIC_REPLICATE_MODEL_VERSION=your_replicate_model_version
+```
+
+### 4. Start the Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the app.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🧠 How It Works
 
-## Learn More
+1. The user **logs in** using Clerk.
+2. The user **uploads an image** of their room.
+3. The user selects the **room type** and one of the **six design styles**.
+4. The app sends a request to **Replicate AI** using Axios.
+5. The redesigned image is generated and displayed.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
