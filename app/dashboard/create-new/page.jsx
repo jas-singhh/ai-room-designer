@@ -77,9 +77,12 @@ const CreateNewListing = () => {
       return;
     }
 
-    const fileName = Date.now() + "_raw." + formData.image.name.split(".").pop();
+    const fileName =
+      Date.now() + "_raw." + formData.image.name.split(".").pop();
     const storageRef = ref(storage, "ai-room-designer/" + fileName);
-    await uploadBytes(storageRef, formData.image).then((res) => console.log("Image uploaded successfully:", res));
+    await uploadBytes(storageRef, formData.image).then((res) =>
+      console.log("Image uploaded successfully:", res)
+    );
 
     const downloadURL = await getDownloadURL(storageRef);
     console.log("Image download URL:", downloadURL);
@@ -88,29 +91,48 @@ const CreateNewListing = () => {
 
   return (
     <div className="w-full">
-      <h2 className="text-3xl font-bold text-center text-orange-700">Experience the Magic of AI Remodelling</h2>
+      <h2 className="text-3xl font-bold text-center text-orange-700">
+        Experience the Magic of AI Remodelling
+      </h2>
       <p className="text-sm text-gray-500 text-center mt-2 tracking-tight">
-        Transform any room with a click. Select a space, choose a style, and watch as AI instantly reimagines your environment.
+        Transform any room with a click. Select a space, choose a style, and
+        watch as AI instantly reimagines your environment.
       </p>
 
       {/* Image upload */}
       <div className="grid grid-cols-1 md:grid-cols-2 mt-8 gap-6">
         <div className="h-100 flex flex-col items-center justify-center gap-2">
           <h4 className="text-gray-600 text-md">Upload Image</h4>
-          <ImageUpload onImageUpload={(file) => handleInputChange("image", file)} />
+          <ImageUpload
+            onImageUpload={(file) => handleInputChange("image", file)}
+          />
         </div>
 
         <div className="flex flex-col gap-3">
           {/* Room Type */}
-          <RoomType selectedRoomType={(val) => handleInputChange("selectedRoomType", val)} />
+          <RoomType
+            selectedRoomType={(val) =>
+              handleInputChange("selectedRoomType", val)
+            }
+          />
           {/* Design Style */}
-          <DesignStyle selectedRoomDesign={(val) => handleInputChange("selectedRoomDesign", val)} />
+          <DesignStyle
+            selectedRoomDesign={(val) =>
+              handleInputChange("selectedRoomDesign", val)
+            }
+          />
           {/* Additional Comments (Optional) */}
-          <AdditionalComments comments={(val) => handleInputChange("comments", val)} />
+          <AdditionalComments
+            comments={(val) => handleInputChange("comments", val)}
+          />
           {/* Submit */}
           <Button
-            className={"bg-orange-700 cursor-pointer hover:bg-orange-900 transition-all ease-in-out duration-400"}
-            disabled={!formData.selectedRoomType || !formData.selectedRoomDesign}
+            className={
+              "bg-orange-700 cursor-pointer hover:bg-orange-900 transition-all ease-in-out duration-400"
+            }
+            disabled={
+              !formData.selectedRoomType || !formData.selectedRoomDesign
+            }
             onClick={handleSubmit}
           >
             Generate <span className="text-orange-300">(1 Credit)</span>
@@ -118,7 +140,10 @@ const CreateNewListing = () => {
         </div>
       </div>
 
-      <Loader isOpen={isLoading} />
+      <Loader
+        isOpen={isLoading}
+        title="Sit tight while we redesign your space..."
+      />
       <ResultDialog
         isOpen={isResultDialogOpen}
         setIsOpen={setIsResultDialogOpen}

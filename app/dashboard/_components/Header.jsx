@@ -19,15 +19,21 @@ const Header = () => {
             <Wand className="w-4 h-4 text-white" />
           </div>
           <h1>
-            AI <span className="text-orange-700 font-semibold">Room</span> Designer
+            AI <span className="text-orange-700 font-semibold">Room</span>{" "}
+            Designer
           </h1>
         </Link>
       </div>
 
       <div className="">
-        <Button variant={"ghost"} className="cursor-pointer">
-          Get More Credits
-        </Button>
+        <Link href={"/dashboard"}>
+          <Button
+            variant={"link"}
+            className="cursor-pointer transition-all ease-in-out duration-400"
+          >
+            Dashboard
+          </Button>
+        </Link>
       </div>
 
       {/* User */}

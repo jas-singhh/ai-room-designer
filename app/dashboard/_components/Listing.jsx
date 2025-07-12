@@ -1,13 +1,45 @@
 "use client";
 import { UserContext } from "@/app/contexts/UserContext";
 import { Button } from "@/components/ui/button";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import EmptyState from "./EmptyState";
 import Link from "next/link";
+import { db } from "@/config/db";
+import { eq } from "drizzle-orm";
+import { generatedAIImages } from "@/config/schema";
+import PreviousListingCard from "./PreviousListingCard";
+import Loader from "../create-new/_components/Loader";
 
 const Listing = () => {
   const { dbUser } = useContext(UserContext);
   const [previousListings, setPreviousListings] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Fetch previous listings from the database
+  useEffect(() => {
+    if (dbUser) {
+      setIsLoading(true);
+      fetchPreviousListings();
+    }
+  }, [dbUser]);
+
+  const fetchPreviousListings = async () => {
+    const res = await db
+      .select()
+      .from(generatedAIImages)
+      .where(eq(generatedAIImages.email, dbUser?.email));
+
+    if (res.length === 0) {
+      setPreviousListings([]);
+      setIsLoading(false);
+      return;
+    }
+
+    setPreviousListings(res);
+    setIsLoading(false);
+
+    console.log("Previous listings fetched:", res);
+  };
 
   return (
     <div className="w-full">
@@ -17,13 +49,29 @@ const Listing = () => {
         </h2>
 
         <Link href={"/dashboard/create-new"}>
-          <Button className={"bg-orange-700 cursor-pointer hover:bg-orange-900 transition-all ease-in-out duration-400"}>
+          <Button
+            className={
+              "bg-orange-700 cursor-pointer hover:bg-orange-900 transition-all ease-in-out duration-400"
+            }
+          >
             + Redesign a Room
           </Button>
         </Link>
       </div>
 
-      <div className="mt-10">{previousListings.length === 0 ? <EmptyState /> : <h3>Your previous room designs will appear here.</h3>}</div>
+      <div className="mt-10">
+        {isLoading ? (
+          <Loader isOpen={isLoading} title="Loading..." />
+        ) : previousListings.length === 0 ? (
+          <EmptyState />
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {previousListings.map((listing, index) => {
+              return <PreviousListingCard listing={listing} key={index} />;
+            })}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
