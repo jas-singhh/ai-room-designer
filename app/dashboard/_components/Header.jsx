@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useContext } from "react";
 import { Wand, Star } from "lucide-react";
 import { UserButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
@@ -8,7 +8,7 @@ import Link from "next/link";
 import { UserContext } from "@/app/contexts/UserContext";
 
 const Header = () => {
-  const { dbUser } = React.useContext(UserContext);
+  const { dbUser } = useContext(UserContext);
 
   return (
     <div className="w-full flex justify-between items-center py-4 px-20 container border-b border-gray-200 bg-white mx-auto">
