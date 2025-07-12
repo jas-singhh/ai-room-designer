@@ -8,7 +8,7 @@ import { db } from "@/config/db";
 import { generatedAIImages } from "@/config/schema";
 
 const replicate = new Replicate({
-  auth: process.env.NEXT_PUBLIC_REPLICARE_API_KEY,
+  auth: process.env.NEXT_PUBLIC_REPLICATE_API_KEY,
 });
 
 export async function POST(req) {
