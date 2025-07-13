@@ -43,7 +43,10 @@ const Listing = () => {
     <div className="w-full">
       <div className="flex items-center justify-between">
         <h2 className="text-sm">
-          Hello, <span className="text-3xl font-semibold">{dbUser?.name}</span>
+          Hello,{" "}
+          <span className="text-xl md:text-3xl font-semibold">
+            {dbUser?.name}
+          </span>
         </h2>
 
         <Link href={"/dashboard/create-new"}>

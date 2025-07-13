@@ -122,7 +122,7 @@ const CreateNewListing = () => {
         <>
           {dbUser?.credits > 0 ? (
             <>
-              <h2 className="text-3xl font-bold text-center text-orange-700">
+              <h2 className="text-2xl md:text-3xl font-bold text-center text-orange-700">
                 Experience the Magic of AI Remodelling
               </h2>
               <p className="text-sm text-gray-500 text-center mt-2 tracking-tight">

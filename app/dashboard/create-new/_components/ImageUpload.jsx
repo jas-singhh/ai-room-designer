@@ -38,13 +38,16 @@ const ImageUpload = ({ onImageUpload }) => {
               className="rounded-xl w-[300px] h-[300px] object-cover"
             />
           ) : (
-            <Image
-              src={"/upload.png"}
-              alt="Upload Image Icon"
-              width={70}
-              height={70}
-              className="cursor-pointer"
-            />
+            <div className="relative w-20 sm:w-24 md:w-28 h-auto">
+              <Image
+                src={"/upload.png"}
+                alt="Upload Image Icon"
+                width={70}
+                height={70}
+                className="cursor-pointer"
+                layout="responsive"
+              />
+            </div>
           )}
         </div>
       </label>

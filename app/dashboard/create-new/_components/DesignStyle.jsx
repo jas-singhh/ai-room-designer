@@ -33,26 +33,39 @@ const DesignStyle = ({ selectedRoomDesign }) => {
 
   return (
     <div>
-      <label htmlFor="design-style" className="text-sm text-gray-600 font-medium">
+      <label
+        htmlFor="design-style"
+        className="text-sm text-gray-600 font-medium"
+      >
         Select a Design Style *
       </label>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-2 mt-2">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-2 mt-2 justify-center">
         {designs.map((design) => {
           return (
             <div
-              className={`relative w-[120px] h-[70px] cursor-pointer transform hover:scale-105 transition-transform duration-300`}
+              className={`relative w-full h-[70px] cursor-pointer transform hover:scale-105 transition-transform duration-300 flex items-center justify-center`}
               key={design.name}
               onClick={() => {
                 selectedRoomDesign(design.name);
                 setSelectedDesign(design.name);
               }}
             >
-              <Image src={design.imageUrl} alt={design.name} fill className="object-cover rounded" sizes="120px" />
+              <Image
+                src={design.imageUrl}
+                alt={design.name}
+                fill
+                className="object-cover rounded"
+                sizes="120px"
+              />
               <div
                 className={`absolute inset-0 flex items-center justify-center bg-black 
                     hover:opacity-10 transition-opacity duration-300
-                    ${selectedDesign === design.name ? "opacity-0" : "opacity-50"} rounded text-white text-xs font-semibold`}
+                    ${
+                      selectedDesign === design.name
+                        ? "opacity-0"
+                        : "opacity-50"
+                    } rounded text-white text-xs font-semibold`}
               >
                 {design.name}
               </div>

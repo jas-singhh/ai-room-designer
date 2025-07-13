@@ -1,16 +1,9 @@
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import React, { useState } from "react";
 import ReactBeforeSliderComponent from "react-before-after-slider-component";
 import "react-before-after-slider-component/dist/build.css";
 import ResultDialog from "../create-new/_components/ResultDialog";
+import "./PreviousListingCard.css";
 
 const PreviousListingCard = ({ listing }) => {
   const [isOpen, setIsOpen] = useState(false);

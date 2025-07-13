@@ -6,7 +6,7 @@ const DashboardLayout = ({ children }) => {
   return (
     <div>
       <Header />
-      <div className=" mx-auto py-10 container px-20">{children}</div>
+      <div className=" mx-auto py-10 container px-5 md:px-20">{children}</div>
     </div>
   );
 };
