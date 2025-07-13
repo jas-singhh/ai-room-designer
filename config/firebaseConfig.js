@@ -7,7 +7,7 @@ import { getStorage } from "firebase/storage";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  apiKey: process.env.FIREBASE_API_KEY,
   authDomain: "ai-room-designer-d4579.firebaseapp.com",
   projectId: "ai-room-designer-d4579",
   storageBucket: "ai-room-designer-d4579.firebasestorage.app",
